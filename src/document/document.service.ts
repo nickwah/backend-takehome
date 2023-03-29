@@ -12,4 +12,12 @@ export class DocumentService {
       },
     });
   }
+
+  queryDocumentsByAuthorId(id: number) {
+    return this.prismaService.document.findMany({
+      where: {
+        authorId: id,
+      },
+    });
+  }
 }
