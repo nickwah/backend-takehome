@@ -1,3 +1,4 @@
+import { DocumentModule } from "./document/document.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { UserModule } from "./user/user.module";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
@@ -14,6 +15,7 @@ import { join } from "node:path";
       autoSchemaFile: join(process.cwd(), "src/schema.gql"),
       sortSchema: true,
     }),
+    DocumentModule,
   ],
 })
 export class AppModule {}
