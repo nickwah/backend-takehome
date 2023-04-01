@@ -1,10 +1,10 @@
 import { User } from "../../user/models/user.model";
-import { Field, ObjectType } from "@nestjs/graphql";
+import { Field, Int, ObjectType } from "@nestjs/graphql";
 import type { Document as DocumentModel } from "@prisma/client";
 
 @ObjectType()
 export class Document implements DocumentModel {
-  @Field()
+  @Field((type) => Int)
   id: number;
 
   @Field()
@@ -14,9 +14,9 @@ export class Document implements DocumentModel {
   author: User;
 
   @Field()
-  body: string;
+  content: string;
 
-  @Field()
+  @Field((type) => Int)
   authorId: number;
 
   @Field()

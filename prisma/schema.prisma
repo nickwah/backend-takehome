@@ -22,7 +22,7 @@ model User {
 model Document {
   id        Int      @id @default(autoincrement())
   title     String
-  body      String
+  content   String
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int // relation scalar field  (used in the `@relation` attribute above)
   createdAt DateTime @default(now())

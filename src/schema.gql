@@ -9,10 +9,10 @@ scalar DateTime
 
 type Document {
   author: User!
-  authorId: Float!
-  body: String!
+  authorId: Int!
+  content: String!
   createdAt: DateTime!
-  id: Float!
+  id: Int!
   title: String!
   updatedAt: DateTime!
 }
@@ -25,6 +25,6 @@ type Query {
 
 type User {
   email: String!
-  id: Float!
+  id: Int!
   name: String!
 }
