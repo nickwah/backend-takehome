@@ -1,9 +1,10 @@
 import { DocumentService } from "./document.service";
-import { Document } from "./models/document.model";
+import { Document, SaveDocumentInput } from "./models/document.model";
 import {
   Args,
   Query,
   Resolver,
+  Mutation,
   ResolveField,
   Parent,
 } from "@nestjs/graphql";
@@ -21,5 +22,23 @@ export class DocumentResolver {
   author(@Parent() document: Document) {
     const { authorId } = document;
     return this.documentService.findAuthorById(authorId);
+  }
+
+  @Mutation((returns) => Document)
+  saveDocument(@Args("document") documentInput: SaveDocumentInput) {
+    if (!documentInput.id) {
+      return this.documentService.createDocument(
+        documentInput.authorId,
+        documentInput.title,
+        documentInput.content
+      );
+    } else {
+      return this.documentService.updateDocument(
+        documentInput.id,
+        documentInput.authorId,
+        documentInput.title,
+        documentInput.content
+      );
+    }
   }
 }

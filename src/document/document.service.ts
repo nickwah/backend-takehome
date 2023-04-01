@@ -1,5 +1,6 @@
 import { PrismaService } from "../prisma";
-import { Injectable } from "@nestjs/common";
+import { Inject, forwardRef, Injectable } from "@nestjs/common";
+import type { Document as DocumentModel } from "@prisma/client";
 
 @Injectable()
 export class DocumentService {
@@ -25,6 +26,36 @@ export class DocumentService {
     return this.prismaService.user.findUniqueOrThrow({
       where: {
         id: authorId,
+      },
+    });
+  }
+
+  async createDocument(
+    authorId: number,
+    title: string,
+    content: string
+  ): Promise<DocumentModel> {
+    return this.prismaService.document.create({
+      data: {
+        authorId: authorId,
+        title: title,
+        content: content,
+      },
+    });
+  }
+
+  async updateDocument(
+    documentId: number,
+    authorId: number,
+    title: string,
+    content: string
+  ): Promise<DocumentModel> {
+    return this.prismaService.document.update({
+      where: { id: documentId },
+      data: {
+        authorId: authorId,
+        title: title,
+        content: content,
       },
     });
   }

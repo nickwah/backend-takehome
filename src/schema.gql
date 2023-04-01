@@ -17,9 +17,20 @@ type Document {
   updatedAt: DateTime!
 }
 
+type Mutation {
+  saveDocument(document: SaveDocumentInput!): Document!
+}
+
 type Query {
   document(id: Float!): Document!
   user(id: Float!): User!
+}
+
+input SaveDocumentInput {
+  authorId: Int!
+  content: String!
+  id: Int
+  title: String!
 }
 
 type User {
