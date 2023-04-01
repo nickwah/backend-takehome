@@ -20,4 +20,12 @@ export class DocumentService {
       },
     });
   }
+
+  findAuthorById(authorId: number) {
+    return this.prismaService.user.findUniqueOrThrow({
+      where: {
+        id: authorId,
+      },
+    });
+  }
 }

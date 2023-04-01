@@ -2,7 +2,7 @@ import { DocumentService } from "../document/document.service";
 import { Document } from "../document/models/document.model";
 import { User } from "./models/user.model";
 import { UserService } from "./user.service";
-import { Args, Query, Resolver } from "@nestjs/graphql";
+import { Args, Query, Resolver, ResolveField, Parent } from "@nestjs/graphql";
 
 @Resolver(() => User)
 export class UserResolver {
@@ -16,8 +16,9 @@ export class UserResolver {
     return this.userService.findByID(id);
   }
 
-  @Query(() => [Document])
-  documents(@Args("authorId") id: number) {
+  @ResolveField("documents", (returns) => [Document])
+  documents(@Parent() user: User) {
+    const { id } = user;
     return this.documentService.queryDocumentsByAuthorId(id);
   }
 }

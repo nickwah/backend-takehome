@@ -16,4 +16,10 @@ export class DocumentResolver {
   document(@Args("id") id: number) {
     return this.documentService.findByID(id);
   }
+
+  @ResolveField()
+  author(@Parent() document: Document) {
+    const { authorId } = document;
+    return this.documentService.findAuthorById(authorId);
+  }
 }

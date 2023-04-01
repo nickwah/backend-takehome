@@ -19,11 +19,11 @@ type Document {
 
 type Query {
   document(id: Float!): Document!
-  documents(authorId: Float!): [Document!]!
   user(id: Float!): User!
 }
 
 type User {
+  documents: [Document!]!
   email: String!
   id: Int!
   name: String!
