@@ -13,6 +13,16 @@ async function seed() {
     })
   );
   await prisma.$transaction(users);
+  const documents = new Array(20).fill(0).map(() =>
+    prisma.document.create({
+      data: {
+        authorId: Math.floor(Math.random() * 10) + 1,
+        title: faker.lorem.words(5),
+        content: faker.lorem.paragraphs(),
+      },
+    })
+  );
+  await prisma.$transaction(documents);
 }
 
 seed()
