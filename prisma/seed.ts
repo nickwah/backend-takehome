@@ -1,5 +1,5 @@
-import { faker } from '@faker-js/faker';
-import { PrismaClient } from '@prisma/client';
+import { faker } from "@faker-js/faker";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -10,7 +10,7 @@ async function seed() {
         name: faker.name.fullName(),
         email: faker.internet.email(),
       },
-    }),
+    })
   );
   await prisma.$transaction(users);
 }
